@@ -1,8 +1,5 @@
 package org.walleth.khex
 
-import jdk.nashorn.internal.runtime.regexp.joni.Regex
-
-
 /**
  *  chars for nibble
  */

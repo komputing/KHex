@@ -50,4 +50,18 @@ class TheHexFun {
         assertThat("0xaa12456789bb".hexToByteArray().toHexString()).isEqualTo("0xaa12456789bb")
     }
 
+    @Test
+    fun regexMatchesForHEX() {
+        assertThat(HEX_REGEX.matches("0x00")).isTrue()
+        assertThat(HEX_REGEX.matches("0xabcdef123456")).isTrue()
+    }
+
+    @Test
+    fun regexFailsForNonHEX() {
+        assertThat(HEX_REGEX.matches("q")).isFalse()
+        assertThat(HEX_REGEX.matches("")).isFalse()
+        assertThat(HEX_REGEX.matches("0x+")).isFalse()
+        assertThat(HEX_REGEX.matches("0xgg")).isFalse()
+    }
+
 }
