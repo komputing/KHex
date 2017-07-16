@@ -19,6 +19,9 @@ fun Char.fromHexToInt() = CHARS.indexOf(this)
 fun ByteArray.toHexString(prefix: String = "0x") = prefix + map { it.toHexString() }.joinToString("")
 fun List<Byte>.toHexString(prefix: String = "0x") = toByteArray().toHexString(prefix)
 
+fun ByteArray.toNoPrefixHexString() = toHexString("")
+fun List<Byte>.toNoPrefixHexString() = toHexString("")
+
 fun String.hexToByteArray(): ByteArray {
     if (length % 2 != 0)
         throw IllegalArgumentException("hex-string must have an even number of digits (nibbles)")
