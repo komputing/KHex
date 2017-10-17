@@ -3,7 +3,7 @@ package org.walleth.khex
 /**
  *  chars for nibble
  */
-private val CHARS = "0123456789abcdef"
+private const val CHARS = "0123456789abcdef"
 
 val HEX_REGEX= Regex("0[xX][0-9a-fA-F]+")
 
@@ -36,3 +36,7 @@ fun String.hexToByteArray(): ByteArray {
         }
     }
 }
+
+fun String.has0xPrefix() = startsWith("0x")
+fun String.prepend0xPrefix() = if (has0xPrefix()) this else "0x$this"
+fun String.clean0xPrefix() = if (has0xPrefix()) this.substring(2) else this

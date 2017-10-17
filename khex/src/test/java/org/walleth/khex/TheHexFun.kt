@@ -64,4 +64,22 @@ class TheHexFun {
         assertThat(HEX_REGEX.matches("0xgg")).isFalse()
     }
 
+
+    @Test
+    fun detect0xWorks() {
+        assertThat("2".has0xPrefix()).isEqualTo(false)
+        assertThat("0xFF".has0xPrefix()).isEqualTo(true)
+    }
+
+    @Test
+    fun prepend0xWorks() {
+        assertThat("2".prepend0xPrefix()).isEqualTo("0x2")
+        assertThat("0xFF".prepend0xPrefix()).isEqualTo("0xFF")
+    }
+
+    @Test
+    fun clean0xWorks() {
+        assertThat("2".clean0xPrefix()).isEqualTo("2")
+        assertThat("0xFF".clean0xPrefix()).isEqualTo("FF")
+    }
 }
