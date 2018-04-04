@@ -6,7 +6,7 @@ apply plugin: "com.github.ben-manes.versions"
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testCompile 'org.assertj:assertj-core:3.8.0'
+    testCompile 'org.assertj:assertj-core:3.9.1'
     testCompile 'junit:junit:4.12'
 }
 
