@@ -2,6 +2,7 @@ package org.walleth.khex
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import kotlin.test.assertFailsWith
 
 class TheHexFun {
 
@@ -81,5 +82,12 @@ class TheHexFun {
     fun clean0xWorks() {
         assertThat("2".clean0xPrefix()).isEqualTo("2")
         assertThat("0xFF".clean0xPrefix()).isEqualTo("FF")
+    }
+
+    @Test
+    fun detectsInvalidHex() {
+        assertFailsWith<IllegalArgumentException> {
+            "0xxx".hexToByteArray()
+        }
     }
 }

@@ -8,6 +8,7 @@ dependencies {
 
     testCompile 'org.assertj:assertj-core:3.9.1'
     testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

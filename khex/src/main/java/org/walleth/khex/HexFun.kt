@@ -5,7 +5,7 @@ package org.walleth.khex
  */
 private const val CHARS = "0123456789abcdef"
 
-val HEX_REGEX= Regex("0[xX][0-9a-fA-F]+")
+val HEX_REGEX = Regex("0[xX][0-9a-fA-F]+")
 
 /**
  *  Returns 2 char hex string for Byte
@@ -31,10 +31,14 @@ fun String.hexToByteArray(): ByteArray {
     return ByteArray(cleanInput.length / 2).apply {
         var i = 0
         while (i < cleanInput.length) {
-            this[i / 2] = ((Character.digit(cleanInput[i], 16) shl 4) + Character.digit(cleanInput[i + 1], 16)).toByte()
+            this[i / 2] = ((cleanInput[i].getNibbleValue() shl 4) + cleanInput[i + 1].getNibbleValue()).toByte()
             i += 2
         }
     }
+}
+
+private fun Char.getNibbleValue() = Character.digit(this, 16).also {
+    if (it == -1) throw IllegalArgumentException("Not a valid hex char: $this")
 }
 
 fun String.has0xPrefix() = startsWith("0x")
