@@ -16,7 +16,7 @@ fun Byte.toHexString() = toInt().let {
 
 fun Char.fromHexToInt() = CHARS.indexOf(this)
 
-fun ByteArray.toHexString(prefix: String = "0x") = prefix + map { it.toHexString() }.joinToString("")
+fun ByteArray.toHexString(prefix: String = "0x") = prefix + joinToString("") { it.toHexString() }
 fun List<Byte>.toHexString(prefix: String = "0x") = toByteArray().toHexString(prefix)
 
 fun ByteArray.toNoPrefixHexString() = toHexString("")
