@@ -1,0 +1,29 @@
+def pomConfig = {
+    licenses {
+        license {
+            name "The MIT License"
+            url "https://opensource.org/licenses/MIT"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "Komputing"
+            name "Komputing"
+            organization "Komputing"
+            organizationUrl "https://github.com/komputing"
+        }
+    }
+
+    scm {
+        url "https://github.com/Komputing/KHex.git"
+    }
+}
+
+project.ext.configureMavenCentralMetadata = { pom ->
+    def root = asNode()
+    root.appendNode('name', project.name)
+    root.appendNode('description', 'A Kotlint multiplatform library to handle hexadecimal value representations')
+    root.appendNode('url', 'https://github.com/Komputing/KHex')
+    root.children().last() + pomConfig
+}
