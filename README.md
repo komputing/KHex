@@ -5,12 +5,11 @@ It was written as part of [KEthereum](https://github.com/komputing/KEthereum) bu
 outside this context and deduplicate code this way.
 
 ## Supported platforms
-| Platform | Supported |
+| Module | Supported platforms |
 | :------- | :-------: |
-| `common` | Yes |
-| `jvm` | Yes | 
-| `js` | No (due to publishing reasons, accepting PR) | 
-| `native` | No (due to publishing reasons, accepting PR) | 
+| `khex` | `common`, `jvm`, `js`, `native` |
+| `khex-extensions` | `common`, `jvm`, `js`, `native` | 
+
 
 # Usage
 ## As an Object
