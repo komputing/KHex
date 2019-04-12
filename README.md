@@ -30,9 +30,18 @@ Then, include the modules inside your project:
 
 ```groovy
 dependencies {
-        implementation 'com.github.komputing.khex:khex:Tag'
-        implmenetation 'com.github.komputing.khex:khex-extensions:Tag'
+    implementation 'com.github.komputing.khex:khex-{platform}:{tag}'
+    implementation 'com.github.komputing.khex:khex-extensions-{platform}:{tag}'
 }
+```
+
+Examples
+```groovy
+implementation 'com.github.komputing.khex:khex-common:{tag}'
+implementation 'com.github.komputing.khex:khex-jvm:{tag}'
+
+implementation 'com.github.komputing.khex:khex-extensions-native:{tag}'
+implementation 'com.github.komputing.khex:khex-extensions-js:{tag}'
 ```
 
 # Usage

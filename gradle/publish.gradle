@@ -16,19 +16,34 @@ task stubDokka(type: Jar) {
 
 def selectArtifactId(project, type, defaultName) {
     def name = project.name
+    def hasNative = project.ext.has("hasNative") && project.ext.hasNative
+
     switch (type) {
         case 'metadata':
-            return "$name"
+            return "$name-common"
+            break
+        case 'kotlinMultiplatform':
+            if (!hasNative) return "$name-kotlinMultiplatform"
+            return "$name-native"
+            break
+        case 'jvm':
+            return "$name-jvm"
             break
         default:
-            return defaultName
+            return hasNative ? defaultName : "$name"
             break
     }
 }
 
 def isAvailableForPublication(publication) {
     def name = publication.name
-    return name in ['metadata']
+    def result = false
+    result = result | (name in ['jvm', 'js', 'metadata', 'kotlinMultiplatform'])
+    result = result | (project.ext.isLinuxHost && name == 'linuxX64')
+    result = result | (project.ext.isWinHost && name == 'mingwX64')
+    result = result | (project.ext.isMacosHost && name in ['iosX64', 'iosArm32', 'iosArm64', 'macosX64'])
+
+    return result
 }
 
 tasks.withType(AbstractPublishToMaven).all {

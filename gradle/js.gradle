@@ -1,0 +1,117 @@
+apply from: rootProject.file('gradle/nodejs.gradle')
+
+kotlin {
+    targets {
+        fromPreset(presets.js, 'js')
+    }
+
+    sourceSets {
+        jsMain.dependencies {
+            api "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+        }
+        jsTest.dependencies {
+            api "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version"
+        }
+    }
+}
+
+compileKotlinJs {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = 'umd'
+    kotlinOptions.main = 'noCall'
+    kotlinOptions.sourceMapEmbedSources = 'always'
+}
+
+compileTestKotlinJs {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.moduleKind = 'umd'
+    kotlinOptions.main = 'call'
+    kotlinOptions.sourceMapEmbedSources = 'always'
+}
+
+task assembleWeb(type: Copy, group: 'build', dependsOn: compileTestKotlinJs) {
+    from compileKotlinJs.destinationDir
+    into "$project.buildDir/node_modules"
+
+    afterEvaluate {
+        def configuration = configurations.jsTestRuntimeClasspath
+        from(files {
+            configuration.collect { File file ->
+                file.name.endsWith(".jar") ?
+                    zipTree(file.absolutePath).matching {
+                        include '*.js'
+                        include '*.js.map'
+                    } :
+                    files()
+            }
+        }.builtBy(configuration))
+    }
+}
+
+def mochaChromeTestPage = file("$buildDir/test-page.html")
+
+task prepareMocha(dependsOn: installDependenciesMocha) {
+    outputs.file(mochaChromeTestPage)
+}
+
+prepareMocha.doLast {
+    def libraryPath = "$buildDir/node_modules"
+    mochaChromeTestPage.text = """<!DOCTYPE html>
+        <html>
+        <head>
+            <title>Mocha Tests</title>
+            <meta charset="utf-8">
+            <link rel="stylesheet" href="$node.nodeModulesDir/node_modules/mocha/mocha.css">
+        </head>
+        <body>
+        <div id="mocha"></div>
+        <script src="$node.nodeModulesDir/node_modules/mocha/mocha.js"></script>
+        <script src="$node.nodeModulesDir/node_modules/mocha-teamcity-reporter/lib/teamcityBrowser.js"></script>
+        <script>mocha.timeout(10000000);</script>
+        <script>mocha.setup('bdd');</script>
+        <script src="$libraryPath/kotlin.js"></script>
+        <script src="$libraryPath/kotlin-test.js"></script>
+        <script src="$compileTestKotlinJs.outputFile"></script>
+        <script>mocha.run();</script>
+        </body>
+        </html>
+    """
+}
+
+task testMochaChrome(type: NodeTask, dependsOn: prepareMocha) {
+    script = file("$node.nodeModulesDir/node_modules/mocha-headless-chrome/bin/start")
+    description = "Run js tests in mocha-headless-chrome"
+    args = [
+        compileTestKotlinJs.outputFile,
+        '--file', mochaChromeTestPage,
+        '-a', 'allow-failed-policy-fetch-for-test',
+        '-a', 'allow-external-pages',
+        '-a', 'no-sandbox',
+        '-a', 'disable-web-security'
+    ]
+
+    if (project.hasProperty("teamcity")) args += ['--reporter', 'mocha-teamcity-reporter']
+}
+
+task testMochaNode(type: NodeTask, dependsOn: prepareMocha) {
+    script = file("$node.nodeModulesDir/node_modules/mocha/bin/mocha")
+    description = "Run js tests in mocha-nodejs"
+    args = [
+        compileTestKotlinJs.outputFile,
+        '--require', 'source-map-support/register',
+        '-a', 'allow-failed-policy-fetch-for-test',
+        '-a', 'allow-external-pages',
+        '-a', 'no-sandbox',
+        '-a', 'disable-web-security'
+    ]
+    if (project.hasProperty("teamcity")) args += ['--reporter', 'mocha-teamcity-reporter']
+}
+
+npmInstall.dependsOn assembleWeb
+//jsTest.dependsOn testMochaNode
+
+if (!project.hasProperty("teamcity") || project.hasProperty("enable-js-tests")) {
+    jsTest.dependsOn testMochaChrome
+}
