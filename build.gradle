@@ -22,9 +22,7 @@ ext.publishLocal = project.hasProperty("publishLocal")
 
 apply from: "gradle/experimental.gradle"
 
-apply plugin: "com.github.ben-manes.versions"
-
-def platforms = ["common", "jvm"]
+def platforms = ["common"]
 def projectNeedsPlatform(project, platform) {
     def files = project.projectDir.listFiles()
     return files.any { it.name == "common" || it.name == platform }
