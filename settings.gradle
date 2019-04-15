@@ -6,5 +6,5 @@ def includeEx(String name) {
     project(name).projectDir = "$rootDir${name.replace(':', '/')}" as File
 }
 
-includeEx ':khex'
-includeEx ':khex-extensions'
+includeEx ':core'
+includeEx ':extensions'

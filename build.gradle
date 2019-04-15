@@ -23,7 +23,7 @@ ext.publishLocal = project.hasProperty("publishLocal")
 
 apply from: "gradle/experimental.gradle"
 
-def platforms = ["common", "jvm", "js", "posix", "darwin"]
+def platforms = ["common", "jvm", "posix", "darwin"]
 def projectNeedsPlatform(project, platform) {
     def files = project.projectDir.listFiles()
     def hasPosix = files.any { it.name == "posix" }
@@ -39,7 +39,7 @@ def projectNeedsPlatform(project, platform) {
 }
 
 allprojects {
-    group = "org.komputing"
+    group = "org.komputing.khex"
     version = configuredVersion
     project.ext.hostManager = new HostManager()
     
@@ -49,13 +49,11 @@ allprojects {
     }
 
     apply plugin: "kotlin-multiplatform"
-
     apply from: rootProject.file("gradle/utility.gradle")
     
     platforms.each { platform ->
         if (projectNeedsPlatform(project, platform)) {
             configure([it]) {
-                
                 apply from: rootProject.file("gradle/${platform}.gradle")
             }
         }

@@ -1,6 +1,7 @@
 package org.komputing.khex.extensions
 
-import org.komputing.khex.Hex
+import org.komputing.khex.decode
+
 
 /**
  * Parses [this] [String] as an hexadecimal value and returns its [ByteArray] representation.
@@ -10,7 +11,7 @@ import org.komputing.khex.Hex
  * @throws IllegalArgumentException if [this] is not an hexadecimal string.
  */
 fun String.hexToByteArray(): ByteArray {
-    return Hex.decode(this)
+    return decode(this)
 }
 
 /**

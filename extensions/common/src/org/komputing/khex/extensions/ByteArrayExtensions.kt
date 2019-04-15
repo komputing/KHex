@@ -1,6 +1,6 @@
 package org.komputing.khex.extensions
 
-import org.komputing.khex.Hex
+import org.komputing.khex.encode
 
 /**
  * Converts [this] [ByteArray] into its hexadecimal string representation prepending to it the given [prefix].
@@ -10,7 +10,7 @@ import org.komputing.khex.Hex
  * pass to this method an empty [prefix].
  */
 fun ByteArray.toHexString(prefix: String = "0x"): String {
-    return Hex.encode(this, prefix)
+    return encode(this, prefix)
 }
 
 /**

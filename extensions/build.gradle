@@ -1,5 +1,5 @@
 kotlin.sourceSets {
     commonMain.dependencies {
-        api project(':khex')
+        api project(':core')
     }
 }
