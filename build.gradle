@@ -39,7 +39,7 @@ def projectNeedsPlatform(project, platform) {
 }
 
 allprojects {
-    group = "org.komputing.khex"
+    group = "com.github.komputing.khex"
     version = configuredVersion
     project.ext.hostManager = new HostManager()
     
