@@ -7,24 +7,24 @@ package org.komputing.khex
 private const val CHARS = "0123456789abcdef"
 
 /**
- * Encodes the given byte [value] as an hexadecimal character.
+ * Encodes the given byte value as an hexadecimal character.
  */
 fun encode(value: Byte): String {
     return CHARS[value.toInt().shr(4) and 0x0f].toString() + CHARS[value.toInt().and(0x0f)].toString()
 }
 
 /**
- * Encodes the given byte array [value] to its hexadecimal representations, and prepends the given [prefix] to it.
+ * Encodes the given byte array value to its hexadecimal representations, and prepends the given prefix to it.
  *
  * Note that by default the 0x prefix is prepended to the result of the conversion.
- * If you want to have the representation without the 0x prefix, pass to this method an empty [prefix].
+ * If you want to have the representation without the 0x prefix, pass to this method an empty prefix.
  */
 fun encode(value: ByteArray, prefix: String = "0x"): String {
     return prefix + value.joinToString("") { encode(it) }
 }
 
 /**
- * Converts the given [ch] into its integer representation considering it as an hexadecimal character.
+ * Converts the given ch into its integer representation considering it as an hexadecimal character.
  */
 private fun hexToBin(ch: Char): Int = when (ch) {
     in '0'..'9' -> ch - '0'
@@ -34,11 +34,11 @@ private fun hexToBin(ch: Char): Int = when (ch) {
 }
 
 /**
- * Parses the given [value] reading it as an hexadecimal string, and returns its byte array representation.
+ * Parses the given value reading it as an hexadecimal string, and returns its byte array representation.
  *
  * Note that either 0x-prefixed string and no-prefixed hex strings are supported.
  *
- * @throws IllegalArgumentException if the [value] is not an hexadecimal string.
+ * @throws IllegalArgumentException if the value is not an hexadecimal string.
  */
 fun decode(value: String): ByteArray {
     // An hex string must always have length multiple of 2
