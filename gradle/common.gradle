@@ -8,3 +8,5 @@ kotlin.sourceSets {
         api "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
     }
 }
+
+project.ext.set("commonStructure", true)

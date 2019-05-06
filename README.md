@@ -4,36 +4,74 @@ KHex is a Kotlin multiplatform library to deal with hexadecimal values.
 It was written as part of [KEthereum](https://github.com/komputing/KEthereum) but then extracted as it can be useful 
 outside this context and deduplicate code this way.
 
+# Download
+The following library is available on Jitpack. The current version is: 
+
+[![](https://jitpack.io/v/komputing/KHex.svg)](https://jitpack.io/#komputing/KHex)
+
+In order to use it, first of all include the Jitpack maven repository inside your project `build.gradle` file: 
+
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Then, include the modules inside your project: 
+
+```groovy
+dependencies {
+    implementation 'com.github.komputing.khex:{module}-{platform}:{version}'
+}
+```
+
+## Available modules
+| Module | Description | 
+| :----- | :---------- |
+| `core` | Contains the basic `Hex` object |
+| `extensions` | Contains all the useful extension functions |
+
 ## Supported platforms
 | Module | Supported platforms |
 | :------- | :-------: |
-| `khex` | `common`, `jvm`, `js`, `native` |
-| `khex-extensions` | `common`, `jvm`, `js`, `native` | 
+| `core` | `common`, `jvm`, `native` |
+| `extensions` | `common`, `jvm`, `native` | 
 
+
+## Examples
+```groovy
+implementation 'com.github.komputing.khex:khex-common:{tag}'
+implementation 'com.github.komputing.khex:khex-jvm:{tag}'
+
+implementation 'com.github.komputing.khex:extensions-native:{tag}'
+implementation 'com.github.komputing.khex:extensions-js:{tag}'
+```
 
 # Usage
-## As an Object
-You can the `Hex` class contained inside this library asa common Kotlin object in order to encode or decode any 
-hexadecimal value.
+## As a function
+You can use the static functions contained inside this library in order to encode or decode any hexadecimal value.
  
 ```kotlin
 // === Encoding ===
 
 val myByteValue = 31.toByte()
-Hex.encode(myByteValue)
+encode(myByteValue)
 
 val myByteArrayValue = byteArrayOf(31, 32 , 33)
-Hex.encode(myByteArrayValue)
+encode(myByteArrayValue)
 
 
 // === Decoding ===
 
 val myHexString = "0xaa12456789bb"
-Hex.decode(myHexString)
+decode(myHexString)
 ```
 
 ## As extension functions
-By including the `khex-extensions` module, you will be able to access a list of extensions functions that can be useful when 
+By including the `extensions` module, you will be able to access a list of extensions functions that can be useful when 
 working with strings and byte arrays/lists.
 
 ```kotlin
