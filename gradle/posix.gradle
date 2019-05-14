@@ -1,5 +1,3 @@
-apply from: rootProject.file("gradle/ide.gradle")
-
 kotlin {
     targets {
         if (project.ext.ideaActive) {
