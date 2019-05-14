@@ -1,4 +1,3 @@
-apply from: rootProject.file("gradle/ide.gradle")
 apply from: rootProject.file("gradle/native.gradle")
 
 kotlin {
