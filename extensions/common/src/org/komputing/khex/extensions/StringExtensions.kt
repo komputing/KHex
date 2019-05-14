@@ -4,23 +4,23 @@ import org.komputing.khex.decode
 
 
 /**
- * Parses [this] [String] as an hexadecimal value and returns its [ByteArray] representation.
+ * Parses this string as an hexadecimal value and returns its byte array representation.
  *
  * Note that either 0x-prefixed string and no-prefixed hex strings are supported.
  *
- * @throws IllegalArgumentException if [this] is not an hexadecimal string.
+ * @throws IllegalArgumentException if this is not an hexadecimal string.
  */
 fun String.hexToByteArray(): ByteArray {
     return decode(this)
 }
 
 /**
- * Returns `true` if and only if [this] value starts with the `0x` prefix.
+ * Returns `true` if and only if this value starts with the `0x` prefix.
  */
 fun String.has0xPrefix() = startsWith("0x")
 
 /**
- * Returns a new [String] obtained by prepends the `0x` prefix to [this] value,
+ * Returns a new string obtained by prepends the `0x` prefix to this value,
  * without looking if it already is prefixed by it.
  *
  * Examples:
@@ -33,7 +33,7 @@ fun String.has0xPrefix() = startsWith("0x")
 fun String.prepend0xPrefix() = if (has0xPrefix()) this else "0x$this"
 
 /**
- * Returns a new [String] obtained by removing the first occurrence of the `0x` prefix from [this] string, if it has it.
+ * Returns a new string obtained by removing the first occurrence of the `0x` prefix from this string, if it has it.
  *
  * Examples:
  * ```kotlin
