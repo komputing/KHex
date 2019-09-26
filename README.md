@@ -7,14 +7,14 @@ outside this context and deduplicate code this way.
 # Download
 The following library is available on Jitpack. The current version is: 
 
-[![](https://jitpack.io/v/komputing/KHex.svg)](https://jitpack.io/#komputing/KHex)
+[![](https://jitpack.io/v/komputing/khex.svg)](https://jitpack.io/#komputing/khex)
 
 In order to use it, first of all include the Jitpack maven repository inside your project `build.gradle` file: 
 
 ```groovy
 allprojects {
     repositories {
-        ...
+        //...
         maven { url 'https://jitpack.io' }
     }
 }
