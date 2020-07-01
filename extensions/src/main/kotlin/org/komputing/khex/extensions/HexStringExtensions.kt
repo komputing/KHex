@@ -3,6 +3,8 @@ package org.komputing.khex.extensions
 import org.komputing.khex.decode
 import org.komputing.khex.model.HexString
 
+internal val HEX_REGEX = Regex("(0[xX])?[0-9a-fA-F]*")
+
 /**
  * Parses [this] [String] as an hexadecimal value and returns its [ByteArray] representation.
  *
@@ -41,3 +43,8 @@ fun HexString.prepend0xPrefix() = HexString(if (has0xPrefix()) string else "0x$s
  * ```
  */
 fun HexString.clean0xPrefix() = HexString(if (has0xPrefix()) string.substring(2) else string)
+
+/**
+ * Returns if a given string is a valid hex-string - either with or without 0x prefix
+ */
+fun HexString.isValidHex() = HEX_REGEX.matches(string)

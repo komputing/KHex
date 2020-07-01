@@ -73,7 +73,7 @@ class TheHexFun {
     @Test
     fun detectsInvalidHex() {
         assertFailsWith<IllegalArgumentException> {
-            decode("0xx")
+            decode("0xxx")
         }
     }
 }

@@ -36,4 +36,24 @@ class HexStringExtensionsTests {
         assertThat(HexString("0xFF").hexToByteArray()).containsExactly(0xFF.toByte())
         assertThat(HexString("0xFFaa").hexToByteArray()).containsExactly(0xFF.toByte(), 0xaa.toByte())
     }
+
+
+    @Test
+    fun detectingValidHexWorks() {
+        assertThat(HexString("0x").isValidHex()).isTrue()
+        assertThat(HexString("0x1a").isValidHex()).isTrue()
+        assertThat(HexString("0x1abcdef").isValidHex()).isTrue()
+        assertThat(HexString("").isValidHex()).isTrue()
+        assertThat(HexString("1a").isValidHex()).isTrue()
+        assertThat(HexString("1abcdef").isValidHex()).isTrue()
+    }
+
+    @Test
+    fun detectingInvalidHexWorks() {
+        assertThat(HexString("0x0x").isValidHex()).isFalse()
+        assertThat(HexString("gg").isValidHex()).isFalse()
+        assertThat(HexString("ab0xcd").isValidHex()).isFalse()
+        assertThat(HexString("yolo").isValidHex()).isFalse()
+        assertThat(HexString("0xyolo").isValidHex()).isFalse()
+    }
 }
