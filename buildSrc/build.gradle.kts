@@ -1,6 +1,7 @@
 plugins {
     idea
     `kotlin-dsl`
+    `kotlin-dsl-precompiled-script-plugins`
 }
 
 repositories {
@@ -12,4 +13,8 @@ idea {
         isDownloadJavadoc = false
         isDownloadSources = false
     }
+}
+
+dependencies {
+    implementation(kotlin("gradle-plugin", "${property("kgp")}"))
 }
