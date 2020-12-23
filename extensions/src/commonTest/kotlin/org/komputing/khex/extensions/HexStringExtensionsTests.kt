@@ -1,8 +1,12 @@
 package org.komputing.khex.extensions
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import assertk.assertThat
+import assertk.assertions.containsExactly
+import assertk.assertions.isEmpty
+import assertk.assertions.isFalse
+import assertk.assertions.isTrue
 import org.komputing.khex.model.HexString
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 /**
