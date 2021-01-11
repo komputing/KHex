@@ -18,4 +18,5 @@ idea {
 
 dependencies {
     implementation(kotlin("gradle-plugin", "${property("kgp")}"))
+    implementation("com.github.ben-manes", "gradle-versions-plugin", "${property("plugin.com.github.ben-manes.versions")}")
 }
