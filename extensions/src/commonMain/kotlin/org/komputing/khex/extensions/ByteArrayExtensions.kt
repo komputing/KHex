@@ -9,10 +9,10 @@ import org.komputing.khex.encode
  * If you want to have the representation without the 0x prefix, use the [toNoPrefixHexString] method or
  * pass to this method an empty [prefix].
  */
-fun ByteArray.toHexString(prefix: String = "0x") = encode(this, prefix)
+public fun ByteArray.toHexString(prefix: String = "0x"): String = encode(this, prefix)
 
 /**
  * Converts [this] [ByteArray] into its hexadecimal representation without prepending any prefix to it.
  */
-fun ByteArray.toNoPrefixHexString() = toHexString(prefix = "")
+public fun ByteArray.toNoPrefixHexString(): String = toHexString(prefix = "")
 

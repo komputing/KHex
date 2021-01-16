@@ -1,3 +1,3 @@
 package org.komputing.khex.model
 
-inline class HexString(val string: String)
+public inline class HexString(public val string: String)

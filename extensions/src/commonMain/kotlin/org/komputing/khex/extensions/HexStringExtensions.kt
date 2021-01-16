@@ -12,12 +12,12 @@ internal val HEX_REGEX = Regex("(0[xX])?[0-9a-fA-F]*")
  *
  * @throws IllegalArgumentException if [this] is not an hexadecimal string.
  */
-fun HexString.hexToByteArray() = decode(string)
+public fun HexString.hexToByteArray(): ByteArray = decode(string)
 
 /**
  * Returns `true` if and only if [this] value starts with the `0x` prefix.
  */
-fun HexString.has0xPrefix() = string.startsWith("0x")
+public fun HexString.has0xPrefix(): Boolean = string.startsWith("0x")
 
 /**
  * Returns a new [String] obtained by prepends the `0x` prefix to [this] value,
@@ -30,7 +30,7 @@ fun HexString.has0xPrefix() = string.startsWith("0x")
  * assertEquals("0x0x123", myString.prepend0xPrefix().prepend0xPrefix().string)
  * ```
  */
-fun HexString.prepend0xPrefix() = HexString(if (has0xPrefix()) string else "0x$string")
+public fun HexString.prepend0xPrefix(): HexString = HexString(if (has0xPrefix()) string else "0x$string")
 
 /**
  * Returns a new [String] obtained by removing the first occurrence of the `0x` prefix from [this] string, if it has it.
@@ -42,9 +42,9 @@ fun HexString.prepend0xPrefix() = HexString(if (has0xPrefix()) string else "0x$s
  * assertEquals("0x123", HexString("0x0x123").clean0xPrefix().string)
  * ```
  */
-fun HexString.clean0xPrefix() = HexString(if (has0xPrefix()) string.substring(2) else string)
+public fun HexString.clean0xPrefix(): HexString = HexString(if (has0xPrefix()) string.substring(2) else string)
 
 /**
  * Returns if a given string is a valid hex-string - either with or without 0x prefix
  */
-fun HexString.isValidHex() = HEX_REGEX.matches(string)
+public fun HexString.isValidHex(): Boolean = HEX_REGEX.matches(string)

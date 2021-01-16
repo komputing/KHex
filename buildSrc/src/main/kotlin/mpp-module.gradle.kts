@@ -8,6 +8,7 @@ plugins {
 }
 
 kotlin {
+    explicitApi()
     targets {
         jvm()
         js(BOTH) {
