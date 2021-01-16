@@ -82,7 +82,7 @@ tasks.withType<JacocoReport> {
  * Run it with $ ./gradlew --scan dependencyUpdates
  * https://github.com/ben-manes/gradle-versions-plugin
  * **/
-tasks.named("dependencyUpdates", DependencyUpdatesTask::class.java).configure {
+tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {
     fun isNonStable(version: String): Boolean {
         val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
         val regex = "^[0-9,.v-]+(-r)?$".toRegex()
