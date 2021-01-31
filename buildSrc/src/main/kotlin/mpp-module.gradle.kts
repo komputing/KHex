@@ -12,10 +12,29 @@ kotlin {
     targets {
         jvm()
         js(BOTH) {
-            nodejs {
-                testTask {
-                    useMocha {
-                        timeout = "10s"
+            compilations {
+                this.forEach { compilation ->
+                    compilation.compileKotlinTask.kotlinOptions.apply {
+                        sourceMap = true
+                        moduleKind = "umd"
+                        metaInfo = true
+                        sourceMapEmbedSources = "always"
+
+                        if (compilation.name == "main") main = "noCall"
+                    }
+                }
+                browser {
+                    testTask {
+                        useKarma {
+                            usePhantomJS()
+                        }
+                    }
+                }
+                nodejs {
+                    testTask {
+                        useMocha {
+                            timeout = "10s"
+                        }
                     }
                 }
             }
