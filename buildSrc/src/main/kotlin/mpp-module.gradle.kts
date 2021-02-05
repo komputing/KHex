@@ -10,7 +10,9 @@ plugins {
 kotlin {
     explicitApi()
     targets {
-        jvm()
+        jvm {
+            compilations["test"].kotlinOptions.jvmTarget = "1.8"
+        }
         js(BOTH) {
             compilations {
                 this.forEach { compilation ->
