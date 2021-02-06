@@ -10,9 +10,7 @@ plugins {
 kotlin {
     explicitApi()
     targets {
-        jvm {
-            compilations["test"].kotlinOptions.jvmTarget = "1.8"
-        }
+        jvm()
         js(BOTH) {
             compilations {
                 this.forEach { compilation ->
@@ -25,23 +23,17 @@ kotlin {
                         if (compilation.name == "main") main = "noCall"
                     }
                 }
-                browser {
-                    testTask {
-                        useKarma {
-                            usePhantomJS()
-                        }
-                    }
-                }
-                nodejs {
-                    testTask {
-                        useMocha {
-                            timeout = "10s"
-                        }
+            }
+            nodejs {
+                testTask {
+                    useMocha {
+                        timeout = "10s"
                     }
                 }
             }
         }
     }
+
     sourceSets {
         commonTest {
             dependencies {
