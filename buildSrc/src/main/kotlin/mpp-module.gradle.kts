@@ -84,10 +84,10 @@ tasks.withType<JacocoReport> {
     group = "Reporting"
     description = "Generate Jacoco coverage reports."
     val coverageSourceDirs = arrayOf(
-        "commonMain/src",
-        "jvmMain/src"
+        "src/commonMain",
+        "src/jvmMain"
     )
-    val classFiles = File("${buildDir}/classes/kotlin/jvm/")
+    val classFiles = File("${buildDir}/classes/kotlin/jvm/main")
         .walkBottomUp()
         .toSet()
     classDirectories.setFrom(classFiles)
