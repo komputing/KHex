@@ -1,12 +1,14 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import java.lang.System.getenv
 
 plugins {
     kotlin("multiplatform")
     id("java-library") // required for jacoco plugin
     jacoco
     id("com.github.ben-manes.versions")
+    id("maven-publish")
 }
 
 kotlin {
@@ -123,4 +125,19 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {
         isNonStable(candidate.version)
     }
     checkConstraints = true
+}
+
+getenv("GITHUB_REPOSITORY")?.let { githubRepo ->
+    val (owner, repoName) = githubRepo.split('/')
+    group = "com.github.$owner.$repoName"
+    version = "master-SNAPSHOT"
+    publishing {
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/$githubRepo")
+                credentials(PasswordCredentials::class)
+            }
+        }
+    }
 }
