@@ -48,3 +48,15 @@ jobs:
 
       - name: Build project and run tests with Gradle
         run: ./gradlew clean build --info
+
+      - name: Bundle the failed build report
+        if: failure()
+        run: find ./build -type d -name 'reports' | zip -@ -r build-reports.zip
+
+      - name: Upload the failed build report
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: error-report
+          path: build-reports.zip
+          retention-days: 7
