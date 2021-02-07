@@ -1,4 +1,6 @@
 import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     kotlin("multiplatform")
@@ -59,6 +61,16 @@ kotlin {
         }
         all {
             languageSettings.enableLanguageFeature("InlineClasses")
+        }
+    }
+}
+
+tasks {
+    withType<AbstractTestTask> {
+        testLogging {
+            events = setOf(TestLogEvent.FAILED, TestLogEvent.PASSED, TestLogEvent.SKIPPED)
+            showExceptions = true
+            exceptionFormat = TestExceptionFormat.FULL
         }
     }
 }
