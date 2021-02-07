@@ -46,3 +46,14 @@ jobs:
 
       - name: Build project and run tests
         run: ./gradlew clean build --info
+
+      - name: Bundle the build report
+        if: failure()
+        run: find ./build -type d -name 'reports' | zip -@ -r build-reports.zip
+
+      - name: Upload the build report
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: error-report
+          path: build-reports.zip
