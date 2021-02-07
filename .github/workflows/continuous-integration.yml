@@ -60,3 +60,6 @@ jobs:
           name: error-report
           path: build-reports.zip
           retention-days: 7
+
+      - name: Publish library with Gradle
+        run: ./gradlew publish
