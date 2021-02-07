@@ -3,6 +3,8 @@ name: Pull Request Check
 env:
   GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=false -Dorg.gradle.vfs.watch=false -Dkotlin.compiler.execution.strategy=in-process'
   JAVA_VERSION: 11
+  ORG_GRADLE_PROJECT_githubUsername: ${{ github.actor }}
+  ORG_GRADLE_PROJECT_githubPassword: ${{ github.token }}
 
 on:
   push:
