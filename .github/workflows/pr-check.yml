@@ -1,16 +1,17 @@
 name: Continuous Integration
 
 env:
-  GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dkotlin.compiler.execution.strategy=in-process'
+  GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=false -Dorg.gradle.vfs.watch=false -Dkotlin.compiler.execution.strategy=in-process'
   JAVA_VERSION: 11
 
 on:
-  push:
+  pull_request:
     branches:
       - master
-      - main
     paths-ignore:
       - '*.md'
+      - 'LICENSE'
+      - '.gitignore'
 
 jobs:
   build:
@@ -44,4 +45,4 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build project and run tests
-        run: ./gradlew clean build --info --no-configure-on-demand --no-watch-fs --no-daemon
+        run: ./gradlew clean build --info
