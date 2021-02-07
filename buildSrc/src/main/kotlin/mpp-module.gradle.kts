@@ -134,7 +134,7 @@ getenv("GITHUB_REPOSITORY")?.let { githubRepo ->
     publishing {
         repositories {
             maven {
-                name = "GitHubPackages"
+                name = "github"
                 url = uri("https://maven.pkg.github.com/$githubRepo")
                 credentials(PasswordCredentials::class)
             }
