@@ -7,11 +7,6 @@ class TheHexFun {
     private val hexRegex = Regex("0[xX][0-9a-fA-F]+")
 
     @Test
-    fun failOnPurpose() {
-        fail("failing on purpose to test ci")
-    }
-
-    @Test
     fun weCanProduceSingleDigitHex() {
         assertEquals(encode(0.toByte()), "00")
         assertEquals(encode(1.toByte()), "01")
