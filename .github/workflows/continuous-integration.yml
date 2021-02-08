@@ -62,4 +62,4 @@ jobs:
           retention-days: 7
 
       - name: Publish library with Gradle
-        run: ./gradlew publish -Pversion=master-SNAPSHOT
+        run: ./gradlew publish -Dversion=master-SNAPSHOT
