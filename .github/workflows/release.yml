@@ -1,4 +1,4 @@
-name: Pull Request Check
+name: Release
 
 env:
   GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.configureondemand=false -Dorg.gradle.vfs.watch=false -Dkotlin.compiler.execution.strategy=in-process'
@@ -7,13 +7,8 @@ env:
   ORG_GRADLE_PROJECT_githubPassword: ${{ github.token }}
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - '*.md'
-      - 'LICENSE'
-      - '.gitignore'
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -63,5 +58,5 @@ jobs:
 
       - name: Publish library with Gradle
         run: |
-          NEW_VERSION=master-SNAPSHOT
+          NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
           ./gradlew publish

@@ -1,3 +1,4 @@
+![CI](https://github.com/fullkomnun/KHex/workflows/Continuous%20Integration/badge.svg)
 # What is it?
 
 KHex is a Kotlin multiplatform library to deal with hexadecimal encoding and decoding.

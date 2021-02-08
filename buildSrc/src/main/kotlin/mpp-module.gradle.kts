@@ -130,7 +130,7 @@ tasks.named("dependencyUpdates", DependencyUpdatesTask::class).configure {
 getenv("GITHUB_REPOSITORY")?.let { githubRepo ->
     val (owner, repoName) = githubRepo.split('/').map(String::toLowerCase)
     group = "com.github.$owner.$repoName"
-    version = "master-SNAPSHOT"
+    version = getenv("NEW_VERSION")
     publishing {
         repositories {
             maven {
