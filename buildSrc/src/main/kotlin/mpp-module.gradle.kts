@@ -131,6 +131,7 @@ getenv("GITHUB_REPOSITORY")?.let { githubRepo ->
     val (owner, repoName) = githubRepo.split('/').map(String::toLowerCase)
     group = "com.github.$owner.$repoName"
     version = getenv("NEW_VERSION")
+    println("$version=${getenv("NEW_VERSION")}")
     publishing {
         repositories {
             maven {
