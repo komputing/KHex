@@ -59,4 +59,4 @@ jobs:
       - name: Publish library with Gradle
         run: |
           NEW_VERSION=$(echo "${GITHUB_REF}" | cut -d "/" -f3)
-          ./gradlew publish
+          ./gradlew publish -Pversion=${NEW_VERSION}
