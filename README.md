@@ -16,7 +16,7 @@ This library is available through GitHub Packages.
 ![badge][badge-js]
 ![badge][badge-jvm]
 
-In order to use it, first include the GitHub Packages maven repository inside your project build.gradle.kts file:
+In order to use it, first include the GitHub Packages maven repository inside your project `build.gradle.kts` file:
 
 ```kotlin
 repositories {
@@ -42,19 +42,23 @@ This library is available on Jitpack. The current version is:
 
 In order to use it, first include the Jitpack maven repository inside your project `build.gradle` file: 
 
-```groovy
+```kotlin
 repositories {
-    maven { url 'https://jitpack.io' }
+    maven { url="https://jitpack.io" }
 }
 ```
 
-Then, include the modules inside your project: 
+# Set it up
 
-```groovy
+Include the modules inside your project:
+
+```kotlin
 dependencies {
-    implementation 'com.github.komputing.khex:<module>:<version>'
+    implementation("com.github.komputing.khex:<module>:<version>")
 }
 ```
+
+Where `<version>` can be either a [release](https://github.com/komputing/KHex/releases) or `<branch>-SNAPSHOT` such as `master-SNAPHOT`.
 
 # Available modules
 
