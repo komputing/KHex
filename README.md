@@ -1,16 +1,46 @@
+![CI](https://github.com/komputing/KHex/workflows/Continuous%20Integration/badge.svg)
 # What is it?
-KHex is a Kotlin library to deal with hexadecimal encoding and decoding.
+
+KHex is a Kotlin multiplatform library to deal with hexadecimal encoding and decoding.
 
 It was incubated as part of [KEthereum](https://github.com/komputing/KEthereum) but then extracted as it can be useful
 outside this context.
 
+
 # Get it
+
+## GitHub Packages
+
+This library is available through GitHub Packages.
+
+![badge][badge-js]
+![badge][badge-jvm]
+
+In order to use it, first include the GitHub Packages maven repository inside your project build.gradle.kts file:
+
+```kotlin
+repositories {
+    maven {
+        name = "komputing/KHex GitHub Packages"
+        url = uri("https://maven.pkg.github.com/komputing/KHex")
+        credentials {
+            username = "token"
+            password = "\u0039\u0032\u0037\u0034\u0031\u0064\u0038\u0033\u0064\u0036\u0039\u0061\u0063\u0061\u0066\u0031\u0062\u0034\u0061\u0030\u0034\u0035\u0033\u0061\u0063\u0032\u0036\u0038\u0036\u0062\u0036\u0032\u0035\u0065\u0034\u0061\u0065\u0034\u0032\u0062"
+        }
+    }
+}
+```
+When 'username' could be anything and 'password' is an [encoded access token for public access](https://github.community/t/download-from-github-package-registry-without-authentication/14407/44).
+
+
+## JitPack (JVM only!)
 
 This library is available on Jitpack. The current version is:
 
 [![](https://jitpack.io/v/komputing/khex.svg)](https://jitpack.io/#komputing/khex)
+![badge][badge-jvm]
 
-In order to use it, first of all include the Jitpack maven repository inside your project `build.gradle` file: 
+In order to use it, first include the Jitpack maven repository inside your project `build.gradle` file: 
 
 ```groovy
 repositories {
@@ -74,3 +104,6 @@ HexString("0xaa12456789bb").clean0xPrefix()
 
 # License
 MIT
+
+[badge-js]: http://img.shields.io/badge/platform-js-yellow.svg?style=flat
+[badge-jvm]: http://img.shields.io/badge/platform-jvm-orange.svg?style=flat

@@ -1,61 +1,20 @@
-apply {
-    from("https://raw.githubusercontent.com/ligi/gradle-common/master/versions_plugin_stable_only.gradle")
+plugins {
+    base
 }
 
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}")
-        classpath("com.github.ben-manes:gradle-versions-plugin:${Versions.versionsPlugin}")
-    }
-   
+val testAggregateReport = tasks.register<TestReport>("testAggregateReport") {
+    group = "Reporting"
+    description = "Collect aggregate test reports of all sub-modules."
+    destinationDir = file("$buildDir/reports/tests")
+    reportOn(subprojects.map {
+        it.tasks.withType<AbstractTestTask>()
+    })
 }
-
-allprojects {
-
-    repositories {
-        jcenter()
-        maven("https://jitpack.io")
-    }
-
-}
-
 
 subprojects {
-    repositories {
-        jcenter()
-        maven("https://jitpack.io")
-        maven("https://kotlin.bintray.com/kotlinx")
-    }
-
-    apply(plugin = "jacoco")
-    apply(plugin = "maven")
-    apply(plugin = "kotlin")
-
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
-
-    configure<JavaPluginExtension> {
-        withSourcesJar()
-        withJavadocJar()
-    }
-
     afterEvaluate {
-
-        dependencies {
-            "implementation"("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}")
-
-            "testImplementation"("org.assertj:assertj-core:3.14.0")
-            "testImplementation"("org.junit.jupiter:junit-jupiter-api:${Versions.jupiter}")
-            "testRuntime"("org.junit.jupiter:junit-jupiter-engine:${Versions.jupiter}")
-
-            "testImplementation"("org.jetbrains.kotlin:kotlin-test")
+        tasks.withType<AbstractTestTask> {
+            finalizedBy(testAggregateReport)
         }
-
     }
 }
-
