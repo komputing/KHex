@@ -1,3 +1,6 @@
 package org.komputing.khex.model
 
-public inline class HexString(public val string: String)
+import kotlin.jvm.JvmInline
+
+@JvmInline
+public value class HexString(public val string: String)
