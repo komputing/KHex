@@ -1,4 +1,4 @@
 object Versions {
     const val jacocoPlugin = "0.8.5"
-    const val assertk = "0.23"
+    const val assertk = "0.24"
 }
