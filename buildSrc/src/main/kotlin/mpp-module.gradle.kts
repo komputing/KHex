@@ -21,7 +21,6 @@ val linuxTargets = arrayOf("linuxX64", "linuxArm64")
 val mingwTargets = arrayOf("mingwX64")
 val nativeTargets = linuxTargets + darwinTargets + mingwTargets
 
-
 kotlin {
     explicitApi()
     targets {
