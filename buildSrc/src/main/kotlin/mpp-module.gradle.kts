@@ -11,23 +11,26 @@ plugins {
     id("maven-publish")
 }
 
-val nativeTargets = arrayOf(
-    "linuxX64",
+val darwinTargets = arrayOf(
     "macosX64", "macosArm64",
     "iosArm64", "iosX64", "iosSimulatorArm64",
     "tvosArm64", "tvosX64", "tvosSimulatorArm64",
     "watchosArm32", "watchosArm64", "watchosX64", "watchosSimulatorArm64",
 )
+val linuxTargets = arrayOf("linuxX64", "linuxArm64")
+val mingwTargets = arrayOf("mingwX64")
+val nativeTargets = linuxTargets + darwinTargets + mingwTargets
 
 kotlin {
     explicitApi()
     targets {
         jvm {
+            withJava() // required for jacoco plugin
             compilations.all {
-                kotlinOptions.jvmTarget = "1.8"
+                kotlinOptions.jvmTarget = "11"
             }
         }
-        js(BOTH) {
+        js(IR) {
             compilations {
                 this.forEach { compilation ->
                     compilation.compileKotlinTask.kotlinOptions.apply {
@@ -110,11 +113,12 @@ tasks.withType<JacocoReport> {
     executionData
         .setFrom(files("${buildDir}/jacoco/jvmTest.exec"))
     reports {
-        xml.isEnabled = true
-        csv.isEnabled = false
-        html.isEnabled = true
-        html.destination =
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(
             File("${buildDir}/jacoco-reports/html")
+        )
     }
 }
 

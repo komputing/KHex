@@ -42,7 +42,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build project and run tests with Gradle
-        run: ./gradlew clean build
+        run: ./gradlew clean build --info
 
       - name: Bundle the failed build report
         if: failure()
