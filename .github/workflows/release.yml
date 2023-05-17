@@ -41,9 +41,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Run watchosX64 tests with Gradle
-        run: ./gradlew core:watchosX64Test
-
       - name: Build project and run tests with Gradle
         run: ./gradlew clean build
 
