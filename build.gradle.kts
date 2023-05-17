@@ -1,5 +1,6 @@
 plugins {
     base
+    id("org.jetbrains.dokka") version "1.8.10"
 }
 
 val testAggregateReport = tasks.register<TestReport>("testAggregateReport") {
@@ -12,6 +13,7 @@ val testAggregateReport = tasks.register<TestReport>("testAggregateReport") {
 }
 
 subprojects {
+    apply(plugin = "org.jetbrains.dokka")
     afterEvaluate {
         tasks.withType<AbstractTestTask> {
             finalizedBy(testAggregateReport)
