@@ -27,7 +27,7 @@ kotlin {
         jvm {
             withJava() // required for jacoco plugin
             compilations.all {
-                kotlinOptions.jvmTarget = "1.8"
+                kotlinOptions.jvmTarget = "11"
             }
         }
         js(IR) {
