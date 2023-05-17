@@ -23,11 +23,12 @@ kotlin {
     explicitApi()
     targets {
         jvm {
+            withJava() // required for jacoco plugin
             compilations.all {
                 kotlinOptions.jvmTarget = "1.8"
             }
         }
-        js(BOTH) {
+        js(IR) {
             compilations {
                 this.forEach { compilation ->
                     compilation.compileKotlinTask.kotlinOptions.apply {
@@ -110,11 +111,12 @@ tasks.withType<JacocoReport> {
     executionData
         .setFrom(files("${buildDir}/jacoco/jvmTest.exec"))
     reports {
-        xml.isEnabled = true
-        csv.isEnabled = false
-        html.isEnabled = true
-        html.destination =
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(
             File("${buildDir}/jacoco-reports/html")
+        )
     }
 }
 
