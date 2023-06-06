@@ -1,6 +1,6 @@
 plugins {
     base
-    id("org.jetbrains.dokka") version "1.8.10"
+    id("org.jetbrains.dokka") version "1.8.20"
 }
 
 val testAggregateReport = tasks.register<TestReport>("testAggregateReport") {
